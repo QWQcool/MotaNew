@@ -65,5 +65,5 @@ PBase CreateBlueKey(int x, int y, int type);
 PBase CreateRedKey(int x, int y, int type);
 PBase CreateUpStairFloor(int x, int y, int type);
 PBase CreateDownStairFloor(int x, int y, int type);
-
+PBase CreateShop(int x, int y, int type);
 #endif

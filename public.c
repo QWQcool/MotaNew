@@ -22,6 +22,7 @@ void RegCreateMasterAll()
     RegCreateMaster(15, CreateRedKey);
     RegCreateMaster(18, CreateUpStairFloor); // 注册创建上楼梯的地板的函数
     RegCreateMaster(19, CreateDownStairFloor); // 注册创建下楼梯的地板的函数
+    RegCreateMaster(21, CreateShop); // 注册创建下楼梯的地板的函数
 }
 
 static int s_Sceneindex = 0;

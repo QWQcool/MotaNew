@@ -76,6 +76,7 @@ void UpdateScene(PScene scene)
                 break;
             }
         }
+        free(s_removeBase);
         s_removeBase = NULL;
     }
 
@@ -122,46 +123,44 @@ void UpdateScene(PScene scene)
         int typePos = 0;
         if (downPos)  //上楼梯，找下一层下楼的位置，把英雄放过去
         {
-            //for (int i = 0; i < g_scene[nowIndex]->index; i++)
-            //{
-            //    xPos = g_scene[nowIndex]->bases[i]->x;
-            //    yPos = g_scene[nowIndex]->bases[i]->y;
-            //    typePos = g_scene[nowIndex]->bases[i]->type;
-            //    if
-            //        (
-            //            typePos != 1 &&
-            //            (xPos - 1 == downPos->x && yPos == downPos->y) ||
-            //            (xPos + 1 == downPos->x && yPos == downPos->y) ||
-            //            (yPos + 1 == downPos->y && xPos == downPos->x) ||
-            //            (yPos - 1 == downPos->y && xPos == downPos->x)
-            //         )
-            //        {
-            //        break;
-            //        }
-            //}
+            for (int i = 0; i < g_scene[nowIndex]->index; i++)
+            {
+                xPos = g_scene[nowIndex]->bases[i]->x;
+                yPos = g_scene[nowIndex]->bases[i]->y;
+                typePos = g_scene[nowIndex]->bases[i]->type;
+                if
+                    (
+                        g_scene[nowIndex]->bases[i]->x!=downPos
+                     )
+                    {
+                    hero->base.x = xPos;
+                    hero->base.y = yPos;
+                    break;
+                    }
+            }
         }
         if (upPos)
         {
-            //for (int i = 0; i < g_scene[nowIndex]->index; i++)
-            //{
-            //    xPos = g_scene[nowIndex]->bases[i]->x;
-            //    yPos = g_scene[nowIndex]->bases[i]->y;
-            //    typePos = g_scene[nowIndex]->bases[i]->type;
-            //    if
-            //        (
-            //            typePos != 1 &&
-            //            (xPos - 1 == upPos->x && yPos == upPos->y) ||
-            //            (xPos + 1 == upPos->x && yPos == upPos->y) ||
-            //            (yPos + 1 == upPos->y && xPos == upPos->x) ||
-            //            (yPos - 1 == upPos->y && xPos == upPos->x)
-            //            )
-            //        {
-            //        break;
-            //        }
-            //}
+            for (int i = 0; i < g_scene[nowIndex]->index; i++)
+            {
+                xPos = g_scene[nowIndex]->bases[i]->x;
+                yPos = g_scene[nowIndex]->bases[i]->y;
+                typePos = g_scene[nowIndex]->bases[i]->type;
+                if
+                    (
+                        typePos != 1 &&
+                        (xPos - 1 == upPos->x && yPos == upPos->y) ||
+                        (xPos + 1 == upPos->x && yPos == upPos->y) ||
+                        (yPos + 1 == upPos->y && xPos == upPos->x) ||
+                        (yPos - 1 == upPos->y && xPos == upPos->x)
+                        )
+                    {
+                    hero->base.x = xPos;
+                    hero->base.y = yPos;
+                    break;
+                    }
+            }
         }
-        //hero->base.x = xPos;
-        //hero->base.y = yPos;
         downPos = NULL;
         upPos = NULL;
         xPos = 0;
@@ -179,6 +178,8 @@ void PrintScene(PScene scene)
         PBase base = scene->bases[i];
         base->Print(base);
     }
+    //隐藏光标
+    printf("\033[?25l");
 }
 
 void RemoveSceneItem(PBase base)

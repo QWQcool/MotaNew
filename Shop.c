@@ -1,77 +1,97 @@
 #include "public.h"
 #include "hero.h"
+#include <conio.h>
 
 typedef struct sShop
 {
     TBase base;
 }TShop, * PShop;
 
+int ShopBuy(void* herov)
+{
+    static int s_buyPos = 0;
+    int IndexItem = 6;
+    int isExit = 0;  //0¼ÌÐøÑ­»·£¬1ÍË³öÑ­»·
+    int isBuy = 0;
+    char* shopItem[1024] =
+    {
+        "1½ð±Ò:10Ñª",
+        "1½ð±Ò:5¹¥",
+        "1½ð±Ò:5·À",
+        "5½ð±Ò:»ÆÔ¿³×",
+        "5½ð±Ò:À¶Ô¿³×",
+        "5½ð±Ò:ºìÔ¿³×"
+    };
+    PHero hero = (PHero)herov;
+    printf("\033[2J\033[1;1H");
+    for (int i = 0; i < IndexItem; i++)
+    {
+        if(i == s_buyPos)printf("\033[91m%s\n\n\033[0m", shopItem[i]);
+        else printf("%s\n\n", shopItem[i]);
+    }
+    printf("QÍË³ö B¹ºÂò WSÌôÑ¡ÎïÆ·\n");
+    switch (_getch())
+    {
+    case 'W':
+    case'w':
+        s_buyPos--;
+        if (s_buyPos < 0)
+        {
+            s_buyPos = IndexItem - 1;
+        }
+        break;
+    case'S':
+    case's':
+        s_buyPos++;
+        if (s_buyPos >= IndexItem)
+        {
+            s_buyPos = 0;
+        }
+        break;
+    case'Q':
+    case'q':
+        isExit = 1;
+        break;
+    case'B':
+    case'b':
+        isBuy = 1;
+        break;
+    default:
+        break;
+    }
+    return isExit;
+}
 
 static void Print(PBase self)
 {
-    PShop key = (PShop)self;
-    printf("\033[33m\033[%d;%dHµê\033[0m", (key->base.x + 1), (key->base.y + 1) * 2);
+    PShop shop = (PShop)self;
+    printf("\033[91m\033[%d;%dHµê\033[0m", (shop->base.x + 1), (shop->base.y + 1) * 2);
 
 }
 
 static int Collion(PBase self, void* herov)
 {
-    PShop key = (PShop)self;
+    PShop shop = (PShop)self;
     PHero hero = (PHero)herov;
-    if (key->base.x == hero->base.x && key->base.y == hero->base.y)
+    if (shop->base.x == hero->base.x && shop->base.y == hero->base.y)
     {
-        switch (self->type)
+        while (1)
         {
-        case 13:
-            hero->yellow++; //»ÆÔ¿³×Ôö¼Ó
-            break;
-        case 14:
-            hero->blue++;
-            break;
-        case 15:
-            hero->red++;
-            break;
-        default:
-            printf("BUG£¡\n");
-            return 1;
-            break;
+            if (ShopBuy(herov))break;
         }
+        return 1;
     }
     return 0;
 }
 
-PBase CreateYellowKey(int x, int y, int type)
+PBase CreateShop(int x, int y, int type)
 {
-    PShop door = malloc(sizeof(TShop));
-    door->base.x = x;
-    door->base.y = y;
-    door->base.type = type;
-    door->base.scene = NULL;
-    door->base.Print = Print;
-    door->base.Collion = Collion;
-    return (PBase)door;
-}
-
-PBase CreateBlueKey(int x, int y, int type)
-{
-    PShop door = malloc(sizeof(TShop));
-    door->base.x = x;
-    door->base.y = y;
-    door->base.type = type;
-    door->base.scene = NULL;
-    door->base.Print = Print;
-    door->base.Collion = Collion;
-    return (PBase)door;
-}
-
-PBase CreateRedKey(int x, int y, int type)
-{
-    PShop door = malloc(sizeof(TShop));
-    door->base.x = x;
-    door->base.y = y;
-    door->base.type = type;
-    door->base.scene = NULL;
-    door->base.Print = Print;
-    door->base.Collion = Collion;
-    return (PBase)door;
+    PShop shop = malloc(sizeof(TShop));
+    shop->base.x = x;
+    shop->base.y = y;
+    shop->base.type = type;
+    shop->base.scene = NULL;
+    shop->base.Print = Print;
+    shop->base.Collion = Collion;
+    return (PBase)shop;
 }
