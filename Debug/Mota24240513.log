@@ -1,0 +1,22 @@
+﻿  Hero.c
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\public.h(18,2): warning C4091: “typedef ”: 没有声明变量时忽略“sBase”的左侧
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Hero.c(22,18): warning C4013: “malloc”未定义；假设外部返回 int
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Hero.c(27,22): warning C4047: “=”:“FPrint”与“void (__cdecl *)(PBase)”的间接级别不同
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Hero.c(22,11): warning C4047: “初始化”:“PHero”与“int”的间接级别不同
+  Mota.c
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\public.h(18,2): warning C4091: “typedef ”: 没有声明变量时忽略“sBase”的左侧
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Mota.c(23,36): warning C4047: “函数”:“int *”与“int [13][13]”的间接级别不同
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Mota.c(23,36): warning C4024: “CreateScene”: 形参和实参 1 的类型不同
+  Scene.c
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\public.h(18,2): warning C4091: “typedef ”: 没有声明变量时忽略“sBase”的左侧
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Scene.c(33,17): warning C4133: “==”: 从“PHero”到“PBase”的类型不兼容
+  Wall.c
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\public.h(18,2): warning C4091: “typedef ”: 没有声明变量时忽略“sBase”的左侧
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Wall.c(29,18): warning C4013: “malloc”未定义；假设外部返回 int
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Wall.c(34,22): warning C4047: “=”:“FPrint”与“void (__cdecl *)(PBase)”的间接级别不同
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Wall.c(29,11): warning C4047: “初始化”:“PWall”与“int”的间接级别不同
+  public.c
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\public.h(18,2): warning C4091: “typedef ”: 没有声明变量时忽略“sBase”的左侧
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\public.c(19,28): warning C4013: “malloc”未定义；假设外部返回 int
+  正在生成代码...
+  Mota24240513.vcxproj -> C:\Users\licuocuo\Desktop\Desktop\code\VSC++\cHomeWorkOne\Debug\Mota24240513.exe

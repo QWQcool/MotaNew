@@ -1,0 +1,6 @@
+﻿  Scene.c
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\public.h(29,2): warning C4091: “typedef ”: 没有声明变量时忽略“sBase”的左侧
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Scene.c(40,17): warning C4133: “==”: 从“PHero”到“PBase”的类型不兼容
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Scene.c(91,33): warning C4133: “==”: 从“PHero”到“PBase”的类型不兼容
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Scene.c(99,62): warning C4133: “=”: 从“PHero”到“PBase”的类型不兼容
+  Mota24240513.vcxproj -> C:\Users\licuocuo\Desktop\Desktop\code\VSC++\cHomeWorkOne\x64\Debug\Mota24240513.exe
