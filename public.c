@@ -20,20 +20,22 @@ void RegCreateMasterAll()
     RegCreateMaster(13, CreateYellowKey);
     RegCreateMaster(14, CreateBlueKey);
     RegCreateMaster(15, CreateRedKey);
+    RegCreateMaster(16, CreateHpPick);
+    RegCreateMaster(17, CreateMoneyPick);
     RegCreateMaster(18, CreateUpStairFloor); // 注册创建上楼梯的地板的函数
     RegCreateMaster(19, CreateDownStairFloor); // 注册创建下楼梯的地板的函数
     RegCreateMaster(21, CreateShop); // 注册创建下楼梯的地板的函数
 }
 
-static int s_Sceneindex = 0;
+static int sg_Sceneindex = 0;
 // 函数CreateScene用于根据给定的地图数据创建一个场景
 PScene CreateScene(int* maps, int w, int h)
 {
     // 分配内存用于存储场景信息
     PScene scene = (PScene)malloc(sizeof(TScene));
     scene->index = 0;
-    scene->indexScene = s_Sceneindex;
-    s_Sceneindex++;
+    scene->indexScene = sg_Sceneindex;
+    sg_Sceneindex++;
     // 遍历地图数据，对每个位置调用相应的创建函数
     for (int x = 0; x < w; x++)
     {

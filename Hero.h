@@ -22,6 +22,10 @@ PBase CreateHero(int x, int y, int type);
 
 PHero GetHero();
 
+int Hero_Init(PHero hero);
 
+void ShowHero();
+
+int SaveHero();
 
 #endif

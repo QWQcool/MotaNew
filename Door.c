@@ -1,7 +1,7 @@
 ﻿#include "public.h"
 #include "hero.h"
 
-static PBase s_removeBase = 0;
+void RemoveSceneItem(PBase base);
 
 typedef struct sDoor
 {
@@ -40,30 +40,39 @@ static int Collion(PBase self, void* herov)
             if (hero->yellow > 0)
             {
                 hero->yellow--; //黄钥匙减少
-                return 2;
+                RemoveSceneItem(self);
+                return 0;
             }
             break;
         case 4:
             if (hero->blue > 0)
             {
                 hero->blue--;
-                return 2;
+                RemoveSceneItem(self);
+                return 0;
             }
             break;
         case 5:
             if (hero->red > 0)
             {
                 hero->red--;
-                return 2;
+                RemoveSceneItem(self);
+                return 0;
             }
             break;
         default:
             break;
         }
-        printf("\nneed key!\n");
+        printf("\033[14;1H 你需要钥匙!\n");
+        Sleep(1000);
         return 1;
     }
     return 0;
+}
+
+static void (DoorFreeCB)(void* that)
+{
+    free(that);
 }
 
 PBase CreateYellowDoor(int x, int y, int type)
@@ -75,6 +84,7 @@ PBase CreateYellowDoor(int x, int y, int type)
     door->base.scene = NULL;
     door->base.Print = Print;
     door->base.Collion = Collion;
+    door->base.release = DoorFreeCB;
     return (PBase)door;
 }
 
@@ -87,6 +97,7 @@ PBase CreateBlueDoor(int x, int y, int type)
     door->base.scene = NULL;
     door->base.Print = Print;
     door->base.Collion = Collion;
+    door->base.release = DoorFreeCB;
     return (PBase)door;
 }
 
@@ -99,5 +110,6 @@ PBase CreateRedDoor(int x, int y, int type)
     door->base.scene = NULL;
     door->base.Print = Print;
     door->base.Collion = Collion;
+    door->base.release = DoorFreeCB;
     return (PBase)door;
 }

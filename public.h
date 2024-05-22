@@ -16,6 +16,7 @@ typedef int (*FPrint)(PBase  self);
 
 // 定义一个函数指针类型FPrint，它指向一个接受一个指向sBase结构体的指针作为参数并返回一个整数的函数
 typedef int (*FCollion)(PBase  self, void* hero);
+typedef void (*FRelese)(void* that);
 
 // 定义sBase结构体，它包含了游戏对象的基本属性，如位置(x, y)、类型(type)、关联的场景(scene)、以及一些行为函数指针
 typedef struct sBase
@@ -26,6 +27,7 @@ typedef struct sBase
     struct sScene* scene;
     FPrint Print;
     FCollion Collion;
+    FRelese release;
 };
 
 // 定义一个函数指针类型FCreateMaster，它指向一个接受三个整数作为参数并返回一个指向sBase结构体的指针的函数
@@ -63,6 +65,8 @@ PBase CreateRedDoor(int x, int y, int type);
 PBase CreateYellowKey(int x, int y, int type);
 PBase CreateBlueKey(int x, int y, int type);
 PBase CreateRedKey(int x, int y, int type);
+PBase CreateHpPick(int x, int y, int type);
+PBase CreateMoneyPick(int x, int y, int type);
 PBase CreateUpStairFloor(int x, int y, int type);
 PBase CreateDownStairFloor(int x, int y, int type);
 PBase CreateShop(int x, int y, int type);

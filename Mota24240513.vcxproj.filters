@@ -42,6 +42,12 @@
     <ClCompile Include="Shop.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Pick.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GameWidget.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="public.h">

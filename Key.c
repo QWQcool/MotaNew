@@ -1,6 +1,7 @@
 #include "public.h"
 #include "hero.h"
 
+void RemoveSceneItem(PBase base);
 typedef struct sKey
 {
     TBase base;
@@ -36,12 +37,15 @@ static int Collion(PBase self, void* herov)
         {
         case 13:
             hero->yellow++; //»ÆÔ¿³×Ôö¼Ó
+            RemoveSceneItem(self);
             break;
         case 14:
             hero->blue++;
+            RemoveSceneItem(self);
             break;
         case 15:
             hero->red++;
+            RemoveSceneItem(self);
             break;
         default:
             printf("BUG£¡\n");
@@ -52,38 +56,46 @@ static int Collion(PBase self, void* herov)
     return 0;
 }
 
+static void (KeyFreeCB)(void* that)
+{
+    free(that);
+}
+
 PBase CreateYellowKey(int x, int y, int type)
 {
-    PKey door = malloc(sizeof(TKey));
-    door->base.x = x;
-    door->base.y = y;
-    door->base.type = type;
-    door->base.scene = NULL;
-    door->base.Print = Print;
-    door->base.Collion = Collion;
-    return (PBase)door;
+    PKey key = malloc(sizeof(TKey));
+    key->base.x = x;
+    key->base.y = y;
+    key->base.type = type;
+    key->base.scene = NULL;
+    key->base.Print = Print;
+    key->base.Collion = Collion;
+    key->base.release = KeyFreeCB;
+    return (PBase)key;
 }
 
 PBase CreateBlueKey(int x, int y, int type)
 {
-    PKey door = malloc(sizeof(TKey));
-    door->base.x = x;
-    door->base.y = y;
-    door->base.type = type;
-    door->base.scene = NULL;
-    door->base.Print = Print;
-    door->base.Collion = Collion;
-    return (PBase)door;
+    PKey key = malloc(sizeof(TKey));
+    key->base.x = x;
+    key->base.y = y;
+    key->base.type = type;
+    key->base.scene = NULL;
+    key->base.Print = Print;
+    key->base.Collion = Collion;
+    key->base.release = KeyFreeCB;
+    return (PBase)key;
 }
 
 PBase CreateRedKey(int x, int y, int type)
 {
-    PKey door = malloc(sizeof(TKey));
-    door->base.x = x;
-    door->base.y = y;
-    door->base.type = type;
-    door->base.scene = NULL;
-    door->base.Print = Print;
-    door->base.Collion = Collion;
-    return (PBase)door;
+    PKey key = malloc(sizeof(TKey));
+    key->base.x = x;
+    key->base.y = y;
+    key->base.type = type;
+    key->base.scene = NULL;
+    key->base.Print = Print;
+    key->base.Collion = Collion;
+    key->base.release = KeyFreeCB;
+    return (PBase)key;
 }

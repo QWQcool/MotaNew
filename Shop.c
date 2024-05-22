@@ -9,33 +9,35 @@ typedef struct sShop
 
 int ShopBuy(void* herov)
 {
-    static int s_buyPos = 0;
+    static int s_buyPos = 1;
     int IndexItem = 6;
     int isExit = 0;  //0¼ÌÐøÑ­»·£¬1ÍË³öÑ­»·
     int isBuy = 0;
     char* shopItem[1024] =
     {
-        "1½ð±Ò:10Ñª",
-        "1½ð±Ò:5¹¥",
-        "1½ð±Ò:5·À",
+        "",
+        "5½ð±Ò:10Ñª",
+        "5½ð±Ò:5¹¥",
+        "5½ð±Ò:5·À",
         "5½ð±Ò:»ÆÔ¿³×",
         "5½ð±Ò:À¶Ô¿³×",
         "5½ð±Ò:ºìÔ¿³×"
     };
     PHero hero = (PHero)herov;
     printf("\033[2J\033[1;1H");
-    for (int i = 0; i < IndexItem; i++)
+    for (int i = 1; i <= IndexItem; i++)
     {
         if(i == s_buyPos)printf("\033[91m%s\n\n\033[0m", shopItem[i]);
         else printf("%s\n\n", shopItem[i]);
     }
     printf("QÍË³ö B¹ºÂò WSÌôÑ¡ÎïÆ·\n");
+    ShowHero();
     switch (_getch())
     {
     case 'W':
     case'w':
         s_buyPos--;
-        if (s_buyPos < 0)
+        if (s_buyPos <= 0)
         {
             s_buyPos = IndexItem - 1;
         }
@@ -43,9 +45,9 @@ int ShopBuy(void* herov)
     case'S':
     case's':
         s_buyPos++;
-        if (s_buyPos >= IndexItem)
+        if (s_buyPos > IndexItem)
         {
-            s_buyPos = 0;
+            s_buyPos = 1;
         }
         break;
     case'Q':
@@ -58,6 +60,87 @@ int ShopBuy(void* herov)
         break;
     default:
         break;
+    }
+    if (isBuy)
+    {
+        switch (s_buyPos)
+        {
+        case 1:
+            if (hero->gold >= 5)
+            {
+                hero->gold -= 5;
+                hero->hp += 10;
+            }
+            else
+            {
+                printf("\n\033[91mwithout enough money\033[0m\n");
+                Sleep(1000);
+            }
+            break;
+        case 2:
+            if (hero->gold >= 5)
+            {
+                hero->gold -= 5;
+                hero->atk += 5;
+            }
+            else
+            {
+                printf("\n\033[91mwithout enough money\033[0m\n");
+                Sleep(1000);
+            }
+            break;
+        case 3:
+            if (hero->gold >= 5)
+            {
+                hero->gold -= 5;
+                hero->def += 5;
+            }
+            else
+            {
+                printf("\n\033[91mwithout enough money\033[0m\n");
+                Sleep(1000);
+            }
+            break;
+        case 4:
+            if (hero->gold >= 5)
+            {
+                hero->gold -= 5;
+                hero->yellow += 1;
+            }
+            else
+            {
+                printf("\n\033[91mwithout enough money\033[0m\n");
+                Sleep(1000);
+            }
+            break;
+        case 5:
+            if (hero->gold >= 5)
+            {
+                hero->gold -= 5;
+                hero->blue += 1;
+            }
+            else
+            {
+                printf("\n\033[91mwithout enough money\033[0m\n");
+                Sleep(1000);
+            }
+            break;
+        case 6:
+            if (hero->gold >= 5)
+            {
+                hero->gold -= 5;
+                hero->red += 1;
+            }
+            else
+            {
+                printf("\n\033[91mwithout enough money\033[0m\n");
+                Sleep(1000);
+            }
+            break;
+        default:
+            break;
+        }
+        isBuy = 0;
     }
     return isExit;
 }
@@ -84,6 +167,11 @@ static int Collion(PBase self, void* herov)
     return 0;
 }
 
+static void (ShopFreeCB)(void* that)
+{
+    free(that);
+}
+
 PBase CreateShop(int x, int y, int type)
 {
     PShop shop = malloc(sizeof(TShop));
@@ -93,5 +181,6 @@ PBase CreateShop(int x, int y, int type)
     shop->base.scene = NULL;
     shop->base.Print = Print;
     shop->base.Collion = Collion;
+    shop->base.release = ShopFreeCB;
     return (PBase)shop;
 }

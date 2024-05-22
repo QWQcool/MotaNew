@@ -128,10 +128,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Door.c" />
+    <ClCompile Include="GameWidget.c" />
     <ClCompile Include="Hero.c" />
     <ClCompile Include="Key.c" />
     <ClCompile Include="Mota.c" />
     <ClCompile Include="MoveFloor.c" />
+    <ClCompile Include="Pick.c" />
     <ClCompile Include="public.c" />
     <ClCompile Include="Scene.c" />
     <ClCompile Include="Shop.c" />
