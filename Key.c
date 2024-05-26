@@ -61,6 +61,20 @@ static void (KeyFreeCB)(void* that)
     free(that);
 }
 
+static int KeySave(PBase self, const char* buf, int size)
+{
+    PKey key = (PKey)self;
+    int nret = sprintf(buf, "%d %d %d",
+        key->base.type, key->base.x, key->base.y
+    );
+    if (nret == -1)
+    {
+        printf("Error in save %d", self->type);
+        exit(1);
+    }
+    return nret;
+}
+
 PBase CreateYellowKey(int x, int y, int type)
 {
     PKey key = malloc(sizeof(TKey));
@@ -71,6 +85,7 @@ PBase CreateYellowKey(int x, int y, int type)
     key->base.Print = Print;
     key->base.Collion = Collion;
     key->base.release = KeyFreeCB;
+    key->base.Save = KeySave;
     return (PBase)key;
 }
 
@@ -84,6 +99,7 @@ PBase CreateBlueKey(int x, int y, int type)
     key->base.Print = Print;
     key->base.Collion = Collion;
     key->base.release = KeyFreeCB;
+    key->base.Save = KeySave;
     return (PBase)key;
 }
 
@@ -97,5 +113,6 @@ PBase CreateRedKey(int x, int y, int type)
     key->base.Print = Print;
     key->base.Collion = Collion;
     key->base.release = KeyFreeCB;
+    key->base.Save = KeySave;
     return (PBase)key;
 }

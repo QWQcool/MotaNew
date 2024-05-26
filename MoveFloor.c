@@ -1,9 +1,6 @@
 #include "public.h"
 #include "hero.h"
 
-extern int g_mapIndex;
-extern PScene* g_scene;
-
 typedef struct sFloor
 {
     TBase base;
@@ -51,6 +48,20 @@ static int Collion(PBase self, void* herov)
     return 0;
 }
 
+static int FloorSave(PBase self, const char* buf, int size)
+{
+    PFloor floor = (PFloor)self;
+    int nret = sprintf(buf, "%d %d %d",
+        floor->base.type, floor->base.x, floor->base.y
+    );
+    if (nret == -1)
+    {
+        printf("Error in save %d", self->type);
+        exit(1);
+    }
+    return nret;
+}
+
 PBase CreateUpStairFloor(int x, int y, int type)
 {
     PFloor floor = malloc(sizeof(TFloor));
@@ -60,6 +71,7 @@ PBase CreateUpStairFloor(int x, int y, int type)
     floor->base.scene = NULL;
     floor->base.Print = Print;
     floor->base.Collion = Collion;
+    floor->base.Save = FloorSave;
     return (PBase)floor;
 }
 
@@ -72,5 +84,6 @@ PBase CreateDownStairFloor(int x, int y, int type)
     floor->base.scene = NULL;
     floor->base.Print = Print;
     floor->base.Collion = Collion;
+    floor->base.Save = FloorSave;
     return (PBase)floor;
 }

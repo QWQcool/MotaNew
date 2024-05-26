@@ -1,11 +1,7 @@
 #include<Windows.h>
 #include<stdio.h>
 #include<conio.h>
-
-int g_isLoad = 0;
-int g_SaveIndex = 0;
-int Game_Init();
-int Load_Init();
+#include "public.h"
 
 int Show_Widget()
 {
@@ -22,12 +18,15 @@ int Show_Widget()
         "退出游戏"
     };
     printf("\033[2J\033[1;1H");
+    printf("\033[%d;35H------------------------------", 10);
     for (int i = 1; i <= IndexItem; i++)
     {
-        if (i == s_selectPos)printf(">\033[91m%s\n\n\033[0m", shopItem[i]);
-        else printf("%s\n\n", shopItem[i]);
+        if (i == s_selectPos)printf("\033[%d;35H>\033[91m%s\n\n\033[0m",10+i*2, shopItem[i]);
+        else printf("\033[%d;35H%s\n\n", 10+i*2,shopItem[i]);
     }
-    printf("Q退出 B进入 WS挑选\n");
+    printf("\033[%d;35HQ退出 B进入 WS挑选\n", 10+(IndexItem+1)*2);
+    printf("\033[%d;35H------------------------------", 10 + (IndexItem + 2) * 2);
+    printf("\033[?25l");
     switch (_getch())
     {
     case 'W':
@@ -35,7 +34,7 @@ int Show_Widget()
         s_selectPos--;
         if (s_selectPos <= 0)
         {
-            s_selectPos = IndexItem - 1;
+            s_selectPos = IndexItem;
         }
         break;
     case'S':
@@ -66,11 +65,11 @@ int Show_Widget()
             isExit = 1;
             break;
         case 2:
-            Load_Init(g_SaveIndex);
+            Load_Init();
 
             isExit = 1;
             //TODO
-            //存档
+            //存档选择，多个存档
             break;
         case 3:
             //TODO
@@ -85,9 +84,4 @@ int Show_Widget()
         isSelect = 0;
     }
     return isExit;
-}
-
-int LoadSaveOp()
-{
-
 }

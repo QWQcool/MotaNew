@@ -16,6 +16,7 @@ typedef struct sHero
 	int yellow;
 	int blue;
 	int red;
+	char name[1024];
 }THero, * PHero;
 
 PBase CreateHero(int x, int y, int type);
@@ -26,6 +27,12 @@ int Hero_Init(PHero hero);
 
 void ShowHero();
 
-int SaveHero();
+int Save_Hero();
+
+void SetLoadHero();
+
+int LoadHero(char* HeroName, int level, int hp, int atk, int def, int gold, int exp, int yellow, int blue, int red);
+
+//void LoadHero();
 
 #endif

@@ -172,6 +172,21 @@ static void (ShopFreeCB)(void* that)
     free(that);
 }
 
+static int ShopSave(PBase self, const char* buf, int size)
+{
+    PShop shop = (PShop)self;
+    int nret = sprintf(buf, "%d %d %d",
+        shop->base.type, shop->base.x, shop->base.y
+    );
+    if (nret == -1)
+    {
+        printf("Error in save %d", self->type);
+        exit(1);
+    }
+    return nret;
+}
+
+
 PBase CreateShop(int x, int y, int type)
 {
     PShop shop = malloc(sizeof(TShop));
@@ -182,5 +197,6 @@ PBase CreateShop(int x, int y, int type)
     shop->base.Print = Print;
     shop->base.Collion = Collion;
     shop->base.release = ShopFreeCB;
+    shop->base.Save = ShopSave;
     return (PBase)shop;
 }

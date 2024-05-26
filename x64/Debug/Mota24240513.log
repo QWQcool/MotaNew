@@ -1,7 +1,74 @@
-﻿  Mota.c
-C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\public.h(31,2): warning C4091: “typedef ”: 没有声明变量时忽略“sBase”的左侧
-C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Mota.c(18,42): warning C4047: “函数”:“int *”与“int [13][13]”的间接级别不同
-C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Mota.c(18,42): warning C4024: “CreateScene”: 形参和实参 1 的类型不同
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: 中间目录(x64\Debug\)包含从另一个项目(Mota24240513.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
+  Door.c
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\public.h(32,2): warning C4091: “typedef ”: 没有声明变量时忽略“sBase”的左侧
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Door.c(67,9): warning C4013: “Sleep”未定义；假设外部返回 int
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Door.c(85,22): warning C4133: “=”: 从“void (__cdecl *)(PBase)”到“FPrint”的类型不兼容
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Door.c(98,22): warning C4133: “=”: 从“void (__cdecl *)(PBase)”到“FPrint”的类型不兼容
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Door.c(111,22): warning C4133: “=”: 从“void (__cdecl *)(PBase)”到“FPrint”的类型不兼容
+  GameWidget.c
+  Hero.c
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\public.h(32,2): warning C4091: “typedef ”: 没有声明变量时忽略“sBase”的左侧
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Hero.c(183,22): warning C4133: “=”: 从“void (__cdecl *)(PBase)”到“FPrint”的类型不兼容
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Hero.c(231,13): warning C4047: “函数”:“char *const ”与“const char *[1024]”的间接级别不同
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Hero.c(231,13): warning C4024: “sprintf”: 形参和实参 1 的类型不同
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Hero.c(232,24): warning C4047: “函数”:“const char *”与“const char *[1024]”的间接级别不同
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Hero.c(232,24): warning C4024: “fopen”: 形参和实参 1 的类型不同
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Hero.c(235,16): warning C4477: “printf”: 格式字符串“%s”需要类型“char *”的参数，但可变参数 1 拥有了类型“const char **”
+  Key.c
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\public.h(32,2): warning C4091: “typedef ”: 没有声明变量时忽略“sBase”的左侧
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Key.c(71,21): warning C4133: “=”: 从“void (__cdecl *)(PBase)”到“FPrint”的类型不兼容
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Key.c(84,21): warning C4133: “=”: 从“void (__cdecl *)(PBase)”到“FPrint”的类型不兼容
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Key.c(97,21): warning C4133: “=”: 从“void (__cdecl *)(PBase)”到“FPrint”的类型不兼容
+  Monster.c
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\public.h(32,2): warning C4091: “typedef ”: 没有声明变量时忽略“sBase”的左侧
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Monster.c(86,25): warning C4133: “=”: 从“void (__cdecl *)(PBase)”到“FPrint”的类型不兼容
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Monster.c(105,25): warning C4133: “=”: 从“void (__cdecl *)(PBase)”到“FPrint”的类型不兼容
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Monster.c(124,25): warning C4133: “=”: 从“void (__cdecl *)(PBase)”到“FPrint”的类型不兼容
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Monster.c(143,25): warning C4133: “=”: 从“void (__cdecl *)(PBase)”到“FPrint”的类型不兼容
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Monster.c(162,25): warning C4133: “=”: 从“void (__cdecl *)(PBase)”到“FPrint”的类型不兼容
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Monster.c(181,25): warning C4133: “=”: 从“void (__cdecl *)(PBase)”到“FPrint”的类型不兼容
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Monster.c(200,25): warning C4133: “=”: 从“void (__cdecl *)(PBase)”到“FPrint”的类型不兼容
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Monster.c(250,9): warning C4013: “Sleep”未定义；假设外部返回 int
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Monster.c(274,17): warning C4013: “_getch”未定义；假设外部返回 int
+  Mota.c
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\public.h(32,2): warning C4091: “typedef ”: 没有声明变量时忽略“sBase”的左侧
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Mota.c(37,38): warning C4047: “函数”:“int *”与“int [13][13]”的间接级别不同
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Mota.c(37,38): warning C4024: “CreateScene”: 形参和实参 1 的类型不同
+  MoveFloor.c
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\public.h(32,2): warning C4091: “typedef ”: 没有声明变量时忽略“sBase”的左侧
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\MoveFloor.c(61,23): warning C4133: “=”: 从“void (__cdecl *)(PBase)”到“FPrint”的类型不兼容
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\MoveFloor.c(73,23): warning C4133: “=”: 从“void (__cdecl *)(PBase)”到“FPrint”的类型不兼容
+  Pick.c
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\public.h(32,2): warning C4091: “typedef ”: 没有声明变量时忽略“sBase”的左侧
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Pick.c(24,16): warning C4566: 由通用字符名称“\u2020”表示的字符不能在当前代码页(936)中表示出来
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Pick.c(71,22): warning C4133: “=”: 从“void (__cdecl *)(PBase)”到“FPrint”的类型不兼容
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Pick.c(84,22): warning C4133: “=”: 从“void (__cdecl *)(PBase)”到“FPrint”的类型不兼容
+  public.c
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\public.h(32,2): warning C4091: “typedef ”: 没有声明变量时忽略“sBase”的左侧
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\public.c(99,13): warning C4013: “Sleep”未定义；假设外部返回 int
+  Scene.c
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\public.h(32,2): warning C4091: “typedef ”: 没有声明变量时忽略“sBase”的左侧
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Scene.c(53,17): warning C4133: “==”: 从“PHero”到“PBase”的类型不兼容
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Scene.c(84,33): warning C4133: “==”: 从“PHero”到“PBase”的类型不兼容
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Scene.c(92,62): warning C4133: “=”: 从“PHero”到“PBase”的类型不兼容
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Scene.c(208,13): warning C4047: “函数”:“char *const ”与“const char *[1024]”的间接级别不同
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Scene.c(208,13): warning C4024: “sprintf”: 形参和实参 1 的类型不同
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Scene.c(209,24): warning C4047: “函数”:“const char *”与“const char *[1024]”的间接级别不同
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Scene.c(209,24): warning C4024: “fopen”: 形参和实参 1 的类型不同
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Scene.c(211,16): warning C4477: “printf”: 格式字符串“%s”需要类型“char *”的参数，但可变参数 1 拥有了类型“const char **”
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Scene.c(236,9): warning C4013: “Sleep”未定义；假设外部返回 int
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Scene.c(260,62): warning C4133: “=”: 从“PHero”到“PBase”的类型不兼容
+  Shop.c
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\public.h(32,2): warning C4091: “typedef ”: 没有声明变量时忽略“sBase”的左侧
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Shop.c(77,17): warning C4013: “Sleep”未定义；假设外部返回 int
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Shop.c(182,22): warning C4133: “=”: 从“void (__cdecl *)(PBase)”到“FPrint”的类型不兼容
+  Wall.c
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\public.h(32,2): warning C4091: “typedef ”: 没有声明变量时忽略“sBase”的左侧
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Wall.c(39,22): warning C4133: “=”: 从“void (__cdecl *)(PBase)”到“FPrint”的类型不兼容
+  正在生成代码...
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Scene.c(261): warning C4716: “LoadGame”: 必须返回一个值
 C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Map.h(44): warning C4716: “Map_Init”: 必须返回一个值
-C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Mota.c(20): warning C4716: “Game_Init”: 必须返回一个值
-  Mota24240513.vcxproj -> C:\Users\licuocuo\Desktop\Desktop\code\VSC++\cHomeWorkOne\x64\Debug\Mota24240513.exe
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Mota.c(39): warning C4716: “Game_Init”: 必须返回一个值
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Monster.c(263): warning C4715: “MonsterFright_Show”: 不是所有的控件路径都返回值
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\GameWidget.c(95): warning C4716: “LoadSaveOp”: 必须返回一个值
+  Mota24240513.vcxproj -> C:\Users\licuocuo\Desktop\Desktop\code\VSC++\cHomeWorkOne\x64\Debug\MotaNew.exe

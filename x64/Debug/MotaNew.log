@@ -1,0 +1,10 @@
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: 中间目录(x64\Debug\)包含从另一个项目(Mota24240513.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
+  Scene.c
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\public.h(29,2): warning C4091: “typedef ”: 没有声明变量时忽略“sBase”的左侧
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Scene.c(34,5): warning C4013: “Sleep”未定义；假设外部返回 int
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Scene.c(74,17): warning C4133: “==”: 从“PHero”到“PBase”的类型不兼容
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Scene.c(105,33): warning C4133: “==”: 从“PHero”到“PBase”的类型不兼容
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Scene.c(113,62): warning C4133: “=”: 从“PHero”到“PBase”的类型不兼容
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Scene.c(251,43): warning C4133: “==”: 从“PHero”到“PBase”的类型不兼容
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Scene.c(267): warning C4716: “LoadGame”: 必须返回一个值
+  MotaNew.vcxproj -> C:\Users\licuocuo\Desktop\Desktop\code\VSC++\cHomeWorkOne\x64\Debug\MotaNew.exe

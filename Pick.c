@@ -21,7 +21,7 @@ static void Print(PBase self)
         printf("\033[93m\033[%d;%dH$\033[0m", (pick->base.x + 1), (pick->base.y + 1) * 2);
         break;
     case 20:
-        printf("\033[93m\033[%d;%dH†\033[0m", (pick->base.x + 1), (pick->base.y + 1) * 2);
+        printf("\033[93m\033[%d;%dH剑\033[0m", (pick->base.x + 1), (pick->base.y + 1) * 2);
         break;
     default:
         break;
@@ -61,6 +61,20 @@ static void (PickFreeCB)(void* that)
     free(that);
 }
 
+static int PickSave(PBase self, const char* buf, int size)
+{
+    PPick pick = (PPick)self;
+    int nret = sprintf(buf, "%d %d %d",
+        pick->base.type, pick->base.x, pick->base.y
+    );
+    if (nret == -1)
+    {
+        printf("Error in save %d", self->type);
+        exit(1);
+    }
+    return nret;
+}
+
 PBase CreateHpPick(int x, int y, int type)
 {
     PPick pick = malloc(sizeof(TPick));
@@ -71,6 +85,7 @@ PBase CreateHpPick(int x, int y, int type)
     pick->base.Print = Print;
     pick->base.Collion = Collion;
     pick->base.release = PickFreeCB;
+    pick->base.Save = PickSave;
     return (PBase)pick;
 }
 
@@ -84,5 +99,21 @@ PBase CreateMoneyPick(int x, int y, int type)
     pick->base.Print = Print;
     pick->base.Collion = Collion;
     pick->base.release = PickFreeCB;
+    pick->base.Save = PickSave;
     return (PBase)pick;
 }
+
+PBase CreateSwordPick(int x, int y, int type)
+{
+    PPick pick = malloc(sizeof(TPick));
+    pick->base.x = x;
+    pick->base.y = y;
+    pick->base.type = type;
+    pick->base.scene = NULL;
+    pick->base.Print = Print;
+    pick->base.Collion = Collion;
+    pick->base.release = PickFreeCB;
+    pick->base.Save = PickSave;
+    return (PBase)pick;
+}
+

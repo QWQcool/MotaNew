@@ -9,10 +9,8 @@ typedef struct sWall
 
 static void Print(PBase self)
 {
-    //ǽ 墙
     PWall wall = (PWall)self;
-    //printf("\033[47;37m\033[%d;%dH ǽ\033[0m", (wall->base.x+1), (wall->base.y+1) * 2); //占两个位的版本
-    printf("\033[107;37m\033[%d;%dHǽ\033[0m", (wall->base.x + 1), (wall->base.y + 1) * 2); //占一个位 测试
+    printf("\033[107;37m\033[%d;%dHǽ\033[0m", (wall->base.x + 1), (wall->base.y + 1) * 2); //ռһ��λ ����
 }
 
 static int Collion(PBase self,void* herov)
@@ -31,6 +29,20 @@ static void (WallFreeCB)(void* that)
     free(that);
 }
 
+static int WallSave(PBase self, const char* buf, int size)
+{
+    PWall wall = (PWall)self;
+    int nret = sprintf(buf, "%d %d %d",
+        wall->base.type, wall->base.x, wall->base.y
+    );
+    if (nret == -1)
+    {
+        printf("Error in save %d", self->type);
+        exit(1);
+    }
+    return nret;
+}
+
 PBase CreateWall(int x, int y, int type)
 {
     PWall wall = malloc(sizeof(TWall));
@@ -41,5 +53,6 @@ PBase CreateWall(int x, int y, int type)
     wall->base.Print = Print;
     wall->base.Collion = Collion;
     wall->base.release = WallFreeCB;
+    wall->base.Save = WallSave;
     return (PBase)wall;
 }

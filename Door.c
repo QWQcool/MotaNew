@@ -75,6 +75,20 @@ static void (DoorFreeCB)(void* that)
     free(that);
 }
 
+static int DoorSave(PBase self, const char* buf, int size)
+{
+    PDoor door = (PDoor)self;
+    int nret = sprintf(buf, "%d %d %d",
+        door->base.type, door->base.x, door->base.y
+    );
+    if (nret == -1)
+    {
+        printf("Error in save %d", self->type);
+        exit(1);
+    }
+    return nret;
+}
+
 PBase CreateYellowDoor(int x, int y, int type)
 {
     PDoor door = malloc(sizeof(TDoor));
@@ -85,6 +99,7 @@ PBase CreateYellowDoor(int x, int y, int type)
     door->base.Print = Print;
     door->base.Collion = Collion;
     door->base.release = DoorFreeCB;
+    door->base.Save = DoorSave;
     return (PBase)door;
 }
 
@@ -98,6 +113,7 @@ PBase CreateBlueDoor(int x, int y, int type)
     door->base.Print = Print;
     door->base.Collion = Collion;
     door->base.release = DoorFreeCB;
+    door->base.Save = DoorSave;
     return (PBase)door;
 }
 
@@ -111,5 +127,6 @@ PBase CreateRedDoor(int x, int y, int type)
     door->base.Print = Print;
     door->base.Collion = Collion;
     door->base.release = DoorFreeCB;
+    door->base.Save = DoorSave;
     return (PBase)door;
 }

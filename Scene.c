@@ -4,14 +4,39 @@
 #include <conio.h>
 
 //PScene s_scene[1024] = { 0 };
-extern PScene* g_scene;
-extern int g_mapIndex;
-extern int g_ShareMemory;
+extern int g_ShareMemory;  //给g_scene分配了几个scene
 static PBase s_removeBase = 0;
 static int s_chanageScene = 0;
+
 void RemoveSceneItem(PBase base);
-void ChanageHeroScene(int index);
-int SaveGame();
+
+int LoadGame();
+
+int SaveAllScene()
+{
+    for (int i = 0; i<g_ShareMemory; ++i)
+    {
+        //PScene scene = g_scene[i];
+        char scenebuf[1024];
+        sprintf(scenebuf, ".\\scenes\\%d.scene.txt", i);
+        FILE* pFile = fopen(scenebuf, "w");
+        fprintf(pFile, "%d %d\n", i, g_scene[i]->index);
+        for (int j = 0; j < g_scene[i]->index; j++)
+        {
+            PBase base = g_scene[i]->bases[j];
+            char buf[1024] = { 0 };
+            int size = base->Save(base, buf, sizeof(buf));
+            fprintf(pFile, "%s\n", buf);
+        }
+        fclose(pFile);
+    }
+    printf("\033[15;1H SceneStyle存档成功!");
+    Sleep(1000);
+
+    return 1;
+}
+
+
 void UpdateScene(PScene scene)
 {
     char c = _getch();
@@ -26,7 +51,10 @@ void UpdateScene(PScene scene)
     case 'a':dirY = -1; break;
     case 'd':dirY = 1; break;
     case 'k':
-        SaveGame();
+        SaveAllScene();
+        return;
+    case 'l':
+        Load_Init();
         break;
     default:
         break;
@@ -135,7 +163,7 @@ void UpdateScene(PScene scene)
             for (int i = 0; i < 4; i++)
             {
                 int xx = dirS[i][0] + upPos->x;
-                int yy = dirS[i][0] + upPos->y;
+                int yy = dirS[i][1] + upPos->y;
                 int bFind = 1;
                 for (int j = 0; j < g_scene[nowIndex]->index; j++)
                 {
@@ -190,63 +218,50 @@ void RemoveSceneItem(PBase base)
     s_removeBase->release(s_removeBase);
 }
 //
-void ChanageHeroScene(int index)
-{
-    s_chanageScene = index;
-}
-
-int SaveScene()
-{
-    const char* SceneFilePath[1024];
-    sprintf(SceneFilePath, ".\\save\\SaveScene.txt");
-    FILE* file = fopen(SceneFilePath, "w");
-    if (file == NULL) {
-        printf("Failed to open file %s\n", SceneFilePath);
-        return 0;
-    }
-    int SceneSize = g_ShareMemory;
-    for (int i = 0; i < SceneSize; i++)
-    {
-        fprintf(file, "%d\n", g_scene[i]->index);
-        for (int j = 0; j < g_scene[i]->index; j++)
-        {
-            //写入g_scene里base的x,y,type每写入一个换一次行
-            fprintf(file, "%d %d %d\n", g_scene[i]->bases[j]->x, g_scene[i]->bases[j]->y, g_scene[i]->bases[j]->type);
-        }
-    }
-    fclose(file);
-    return 1;
-}
-
-int SaveGame()
-{
-    int sH = SaveHero();
-    int sS = SaveScene();
-    if (sH && sS)
-    {
-        printf("\033[14;1H 存档成功!");
-        Sleep(1000);
-    }
-    else
-    {
-        printf("\033[14;1H 存档失败!");
-        Sleep(1000);
-        return 0;
-    }
-    return 1;
-}
-
-int LoadScene()
-{
-
-}
-
-int LoadHero()
-{
-
-}
 
 int LoadGame()
 {
-
+    for (int i = 0; i < g_scene[g_mapIndex]->index; i++)
+    {
+        if (g_scene[g_mapIndex]->bases[i] == GetHero())
+        {
+            g_scene[g_mapIndex]->bases[i] = g_scene[g_mapIndex]->bases[g_scene[g_mapIndex]->index - 1];
+            g_scene[g_mapIndex]->index--;
+            break;
+        }
+    }
+    for (int i = 0; i < g_ShareMemory; i++)
+    {
+        free(g_scene[i]);
+    }
+    free(g_scene);
+    free(GetHero());
+    //重新加载当前场景
+    //Load_Init(0);
+    LoadSceneFile(g_scene);
 }
+
+//老的存档方式
+//int SaveScene()
+//{
+//    const char* SceneFilePath[1024];
+//    sprintf(SceneFilePath, ".\\save\\SaveScene.txt");
+//    FILE* file = fopen(SceneFilePath, "w");
+//    if (file == NULL) {
+//        printf("Failed to open file %s\n", SceneFilePath);
+//        return 0;
+//    }
+//    int SceneSize = g_ShareMemory;
+//    fprintf(file, "%d\n", g_mapIndex);
+//    for (int i = 0; i < SceneSize; i++)
+//    {
+//        fprintf(file, "%d\n", g_scene[i]->index);
+//        for (int j = 0; j < g_scene[i]->index; j++)
+//        {
+//            //写入g_scene里base的x,y,type每写入一个换一次行
+//            fprintf(file, "%d %d %d\n", g_scene[i]->bases[j]->x, g_scene[i]->bases[j]->y, g_scene[i]->bases[j]->type);
+//        }
+//    }
+//    fclose(file);
+//    return 1;
+//}

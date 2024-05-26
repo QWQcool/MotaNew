@@ -1,31 +1,13 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include <stdio.h>
 #include "public.h"
-#include "Map.h"
+#include <stdio.h>
 int Show_Widget();
+void SetLoadHero();
 
 int g_ShareMemory = M_index;
-PScene* g_scene;
-extern int g_isLoad;
-
-int Game_Init()
-{
-        Map_Init();
-        RegCreateMasterAll();
-        g_scene = (PScene*)malloc(sizeof(PScene) * g_ShareMemory);
-        for (int i = g_mapIndex; i < g_ShareMemory; i++)
-        {
-            g_scene[i] = CreateScene(Maps[i], mapX, mapY);
-        }
-}
-
-int Load_Init(int saveIndex)
-{
-
-}
 
 int main()
 {
+    RegCreateMasterAll();
     while (1)
     {
         if (Show_Widget())break;
@@ -35,6 +17,30 @@ int main()
         PrintScene(g_scene[g_mapIndex]);
         UpdateScene(g_scene[g_mapIndex]);
     }
+    for (int i = g_mapIndex; i < g_ShareMemory; i++)
+    {
+        free(g_scene[i]);
+    }
     free(g_scene);
     return 0;
+}
+
+int Game_Init()
+{
+    g_mapIndex = 0;
+    g_scene = (PScene*)malloc(sizeof(PScene) * g_ShareMemory);
+    Map_Init();
+    for (int i = g_mapIndex; i < g_ShareMemory; i++)
+    {
+        g_scene[i] = CreateScene(Maps[i], mapX, mapY);
+    }
+}
+
+int Load_Init()
+{
+    g_scene = (PScene*)malloc(sizeof(PScene) * g_ShareMemory);
+    LoadSceneFile(g_scene);
+    //SetLoadHero();
+    //LoadScene(g_scene);
+    return 1;
 }
