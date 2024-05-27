@@ -42,6 +42,7 @@ typedef struct sScene
     int indexScene;
 }TScene, (*PScene);
 
+int g_ShareMemory;  //给g_scene分配了几个scene
 int g_mapIndex;
 PScene* g_scene;
 
@@ -59,14 +60,22 @@ int Game_Init();
 int Load_Init();
 
 //old save
-//int LoadScene(PScene* scene);
+//int LoadScene();
 //int SaveScene()
 
 //new save
 int SaveAllScene();
 
-int LoadSceneFile(PScene* g_scene);
+int LoadSceneFile();
 
+//游戏中触发事件
+//加载游戏
+int LoadGame();
+//移除元素
+void RemoveSceneItem(PBase base);
+//英雄在楼层移动
+void SetHeroMoveFloorXY(int x, int y);
+int HeroMoveFloor(int beforeIndex);
 
 // 声明一系列创建不同类型游戏对象的函数，它们都接受位置(x, y)和类型(type)作为参数，并返回一个指向sBase结构体的指针
 PBase CreateWall(int x, int y, int type);

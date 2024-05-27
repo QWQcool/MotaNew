@@ -1,8 +1,6 @@
 #include "public.h"
 #include "hero.h"
 
-void RemoveSceneItem(PBase base);
-
 typedef struct sMonster
 {
     TBase base;

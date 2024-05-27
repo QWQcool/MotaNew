@@ -114,6 +114,12 @@ int Hero_Init(PHero hero)
     return 0; // Success
 }
 
+static void (HeroFreeCB)(void* that)
+{
+    free(that);
+    s_hero = NULL;
+}
+
 PBase CreateHero(int x, int y, int type)
 {
     if(s_hero!=NULL)
@@ -131,6 +137,7 @@ PBase CreateHero(int x, int y, int type)
     hero->base.scene = NULL;
     hero->base.Print = Print;
     hero->base.Save = HeroSave;
+    hero->base.release = HeroFreeCB;
     //1lv 800hp 10atk 10def 0gold 0exp 1yellow 1blue 1red
     //hero->level = 1;
     //hero->hp = 800;
@@ -203,9 +210,12 @@ int Save_Hero()
 }
 
 
-int LoadHero(char* HeroName,int level,int hp,int atk,int def, int gold, int exp , int yellow , int blue,int red)
+int LoadHero(int type,int x,int y,char* HeroName,int level,int hp,int atk,int def, int gold, int exp , int yellow , int blue,int red)
 {
     //s_hero->name = HeroName;
+    s_hero->base.type = type;
+    s_hero->base.x = x;
+    s_hero->base.y = y;
     strncpy(s_hero->name, HeroName, sizeof(s_hero->name));
     s_hero->level = level;
     s_hero->hp = hp;

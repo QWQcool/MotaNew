@@ -1,9 +1,6 @@
 #include "public.h"
 #include <stdio.h>
 int Show_Widget();
-void SetLoadHero();
-
-int g_ShareMemory = M_index;
 
 int main()
 {
@@ -27,6 +24,7 @@ int main()
 
 int Game_Init()
 {
+    g_ShareMemory = M_index;
     g_mapIndex = 0;
     g_scene = (PScene*)malloc(sizeof(PScene) * g_ShareMemory);
     Map_Init();
@@ -38,9 +36,8 @@ int Game_Init()
 
 int Load_Init()
 {
+    g_ShareMemory = M_index;
     g_scene = (PScene*)malloc(sizeof(PScene) * g_ShareMemory);
-    LoadSceneFile(g_scene);
-    //SetLoadHero();
-    //LoadScene(g_scene);
+    LoadSceneFile();
     return 1;
 }

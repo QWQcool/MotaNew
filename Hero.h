@@ -29,9 +29,7 @@ void ShowHero();
 
 int Save_Hero();
 
-void SetLoadHero();
-
-int LoadHero(char* HeroName, int level, int hp, int atk, int def, int gold, int exp, int yellow, int blue, int red);
+int LoadHero(int type, int x, int y, char* HeroName, int level, int hp, int atk, int def, int gold, int exp, int yellow, int blue, int red);
 
 //void LoadHero();
 

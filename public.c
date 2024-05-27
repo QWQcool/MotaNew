@@ -3,8 +3,8 @@
 // 定义一个静态数组s_creates，用于存储不同类型的游戏对象创建函数
 static FCreateMaster  s_creates[1024] = { 0 };
 
-extern int g_ShareMemory;
-int LoadHero(char* HeroName, int level, int hp, int atk, int def, int gold, int exp, int yellow, int blue, int red);
+//获取hero.h里的LoadHero函数
+int LoadHero(int type, int x, int y, char* HeroName, int level, int hp, int atk, int def, int gold, int exp, int yellow, int blue, int red);
 // 函数RegCreateMaster用于注册一个新的游戏对象创建函数到s_creates数组中
 void RegCreateMaster(int index, FCreateMaster cb)
 {
@@ -77,62 +77,8 @@ PScene CreateScene(int* maps, int w, int h)
     return scene;
 }
 
-//老加载方式
-int LoadScene(PScene* g_scene)
-{
-    const char* filename = ".\\save\\SaveScene.txt";
-    FILE* file = fopen(filename, "r");
-    if (file == NULL) {
-        printf("Failed to open file %s\n", filename);
-        exit(1);
-    }
-    int indexLast = 0;
-    int sX = 0;
-    int sY = 0;
-    int sType = 0;
-    fscanf(file, "%d", &g_mapIndex);
-    for (int i = 0; i < g_ShareMemory; i++)
-    {
-        int FileIndexLast = fscanf(file, "%d", &indexLast);
-        g_scene[i] = (PScene)malloc(sizeof(TScene));
-        g_scene[i]->indexScene = i;
-        g_scene[i]->index = 0;
-        if (FileIndexLast != 1) {
-            printf("Error reading FileIndexLast from file.\n");
-            fclose(file);
-            Sleep(1000);
-            return 0; // Indicate failure
-        }
-        for (int j = 0; j < indexLast; j++)
-        {
-            int FileX = fscanf(file, "%d", &sX);
-            int FileY = fscanf(file, "%d", &sY);
-            int FileT = fscanf(file, "%d", &sType);
-            if (FileT != 1 && FileX!=1 && FileY != 1) {
-                printf("Error reading xyType from file.\n");
-                fclose(file);
-                Sleep(1000);
-                return 0; // Indicate failure
-            }
-            // 根据类型从s_creates数组中获取相应的创建函数
-            FCreateMaster f = s_creates[sType];
-            if (f == NULL) continue; // 如果没有找到对应的创建函数，跳过此次循环
-
-            // 调用创建函数创建游戏对象
-            PBase base = f(sX, sY, sType);
-            if (base == NULL) continue; // 如果创建失败，跳过此次循环
-
-            // 将新创建的游戏对象添加到场景中
-            base->scene = g_scene[i];
-            g_scene[i]->bases[g_scene[i]->index] = base;
-            g_scene[i]->index++;
-        }
-    }
-    fclose(file);
-    return 1;
-}
-
-int LoadSceneFile(PScene* g_scene)
+//新加载方式
+int LoadSceneFile()
 {
     const char filename[1024];
     for (int i = 0; i < g_ShareMemory; i++)
@@ -201,7 +147,7 @@ int LoadSceneFile(PScene* g_scene)
                 fscanf(file, "%d", &yellow);
                 fscanf(file, "%d", &blue);
                 fscanf(file, "%d", &red);
-                LoadHero(HeroName, level, hp, atk, def, gold, exp, yellow, blue, red);
+                LoadHero(sType,sX,sY,HeroName, level, hp, atk, def, gold, exp, yellow, blue, red);
                 free(HeroName);
             }
             else
@@ -257,3 +203,58 @@ int Map_Init()
         fillArrayFromFile(mapSourceFile, i);
     }
 }
+
+//老加载方式
+//int LoadScene()
+//{
+//    const char* filename = ".\\save\\SaveScene.txt";
+//    FILE* file = fopen(filename, "r");
+//    if (file == NULL) {
+//        printf("Failed to open file %s\n", filename);
+//        exit(1);
+//    }
+//    int indexLast = 0;
+//    int sX = 0;
+//    int sY = 0;
+//    int sType = 0;
+//    fscanf(file, "%d", &g_mapIndex);
+//    for (int i = 0; i < g_ShareMemory; i++)
+//    {
+//        int FileIndexLast = fscanf(file, "%d", &indexLast);
+//        g_scene[i] = (PScene)malloc(sizeof(TScene));
+//        g_scene[i]->indexScene = i;
+//        g_scene[i]->index = 0;
+//        if (FileIndexLast != 1) {
+//            printf("Error reading FileIndexLast from file.\n");
+//            fclose(file);
+//            Sleep(1000);
+//            return 0; // Indicate failure
+//        }
+//        for (int j = 0; j < indexLast; j++)
+//        {
+//            int FileX = fscanf(file, "%d", &sX);
+//            int FileY = fscanf(file, "%d", &sY);
+//            int FileT = fscanf(file, "%d", &sType);
+//            if (FileT != 1 && FileX != 1 && FileY != 1) {
+//                printf("Error reading xyType from file.\n");
+//                fclose(file);
+//                Sleep(1000);
+//                return 0; // Indicate failure
+//            }
+//            // 根据类型从s_creates数组中获取相应的创建函数
+//            FCreateMaster f = s_creates[sType];
+//            if (f == NULL) continue; // 如果没有找到对应的创建函数，跳过此次循环
+//
+//            // 调用创建函数创建游戏对象
+//            PBase base = f(sX, sY, sType);
+//            if (base == NULL) continue; // 如果创建失败，跳过此次循环
+//
+//            // 将新创建的游戏对象添加到场景中
+//            base->scene = g_scene[i];
+//            g_scene[i]->bases[g_scene[i]->index] = base;
+//            g_scene[i]->index++;
+//        }
+//    }
+//    fclose(file);
+//    return 1;
+//}
