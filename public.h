@@ -28,7 +28,7 @@ typedef struct sBase
     FSave  Save;
 };
 
-typedef PBase(*FCreateMaster)(int x, int y, int type);
+typedef PBase(*FCreateMaster)(int x, int y, int type, const char* buf);
 
 void RegCreateMaster(int index, FCreateMaster cb);
 
@@ -78,27 +78,27 @@ void SetHeroMoveFloorXY(int x, int y);
 int HeroMoveFloor(int beforeIndex);
 
 // 声明一系列创建不同类型游戏对象的函数，它们都接受位置(x, y)和类型(type)作为参数，并返回一个指向sBase结构体的指针
-PBase CreateWall(int x, int y, int type);
-PBase CreateHero(int x, int y, int type);
-PBase CreateYellowDoor(int x, int y, int type);
-PBase CreateBlueDoor(int x, int y, int type);
-PBase CreateRedDoor(int x, int y, int type);
+PBase CreateWall(int x, int y, int type,const char* buf);
+PBase CreateHero(int x, int y, int type, const char* buf);
+PBase CreateYellowDoor(int x, int y, int type, const char* buf);
+PBase CreateBlueDoor(int x, int y, int type, const char* buf);
+PBase CreateRedDoor(int x, int y, int type, const char* buf);
 
-PBase CreateGreenSlime(int x, int y, int type);
-PBase CreateRedSlime(int x, int y, int type);
-PBase CreateBlackSlime(int x, int y, int type);
-PBase CreateBlueBat(int x, int y, int type);
-PBase CreateBigBat(int x, int y, int type);
-PBase CreateBlueMagic(int x, int y, int type);
-PBase CreateSkeleton(int x, int y, int type);
+PBase CreateGreenSlime(int x, int y, int type, const char* buf);
+PBase CreateRedSlime(int x, int y, int type, const char* buf);
+PBase CreateBlackSlime(int x, int y, int type, const char* buf);
+PBase CreateBlueBat(int x, int y, int type, const char* buf);
+PBase CreateBigBat(int x, int y, int type, const char* buf);
+PBase CreateBlueMagic(int x, int y, int type, const char* buf);
+PBase CreateSkeleton(int x, int y, int type, const char* buf);
 
-PBase CreateYellowKey(int x, int y, int type);
-PBase CreateBlueKey(int x, int y, int type);
-PBase CreateRedKey(int x, int y, int type);
-PBase CreateHpPick(int x, int y, int type);
-PBase CreateMoneyPick(int x, int y, int type);
-PBase CreateUpStairFloor(int x, int y, int type);
-PBase CreateDownStairFloor(int x, int y, int type);
-PBase CreateSwordPick(int x, int y, int type);
-PBase CreateShop(int x, int y, int type);
+PBase CreateYellowKey(int x, int y, int type, const char* buf);
+PBase CreateBlueKey(int x, int y, int type, const char* buf);
+PBase CreateRedKey(int x, int y, int type, const char* buf);
+PBase CreateHpPick(int x, int y, int type, const char* buf);
+PBase CreateMoneyPick(int x, int y, int type, const char* buf);
+PBase CreateUpStairFloor(int x, int y, int type, const char* buf);
+PBase CreateDownStairFloor(int x, int y, int type, const char* buf);
+PBase CreateSwordPick(int x, int y, int type, const char* buf);
+PBase CreateShop(int x, int y, int type, const char* buf);
 #endif

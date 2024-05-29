@@ -73,7 +73,7 @@ static int PickSave(PBase self, const char* buf, int size)
     return nret;
 }
 
-PBase CreateHpPick(int x, int y, int type)
+PBase CreateHpPick(int x, int y, int type, const char* buf)
 {
     PPick pick = malloc(sizeof(TPick));
     pick->base.x = x;
@@ -87,7 +87,7 @@ PBase CreateHpPick(int x, int y, int type)
     return (PBase)pick;
 }
 
-PBase CreateMoneyPick(int x, int y, int type)
+PBase CreateMoneyPick(int x, int y, int type, const char* buf)
 {
     PPick pick = malloc(sizeof(TPick));
     pick->base.x = x;
@@ -101,7 +101,7 @@ PBase CreateMoneyPick(int x, int y, int type)
     return (PBase)pick;
 }
 
-PBase CreateSwordPick(int x, int y, int type)
+PBase CreateSwordPick(int x, int y, int type, const char* buf)
 {
     PPick pick = malloc(sizeof(TPick));
     pick->base.x = x;

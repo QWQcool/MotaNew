@@ -43,7 +43,7 @@ static int WallSave(PBase self, const char* buf, int size)
     return nret;
 }
 
-PBase CreateWall(int x, int y, int type)
+PBase CreateWall(int x, int y, int type, const char* buf)
 {
     PWall wall = malloc(sizeof(TWall));
     wall->base.x = x;

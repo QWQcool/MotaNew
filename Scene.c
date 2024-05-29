@@ -129,48 +129,18 @@ void SetHeroMoveFloorXY(int x, int y)
 
 int LoadGame()
 {
-    for (int i = 0; i < g_scene[g_mapIndex]->index; i++)
+    //释放之前的内存
+    for (int i = 0; i < g_ShareMemory; ++i)
     {
-        if (g_scene[g_mapIndex]->bases[i] == GetHero())
+        PScene scene = g_scene[i];
+        for (int j = 0; j < scene->index; j++)
         {
-            g_scene[g_mapIndex]->bases[i] = g_scene[g_mapIndex]->bases[g_scene[g_mapIndex]->index - 1];
-            g_scene[g_mapIndex]->index--;
-            break;
+            PBase base = scene->bases[j];
+            base->release(base);
         }
-    }
-    for (int i = 0; i < g_ShareMemory; i++)
-    {
         free(g_scene[i]);
+        g_scene[i] = NULL;
     }
-    free(g_scene);
     free(GetHero());
-    //重新加载当前场景
-    //Load_Init(0);
     LoadSceneFile(g_scene);
 }
-
-
-//老的存档方式
-//int SaveScene()
-//{
-//    const char* SceneFilePath[1024];
-//    sprintf(SceneFilePath, ".\\save\\SaveScene.txt");
-//    FILE* file = fopen(SceneFilePath, "w");
-//    if (file == NULL) {
-//        printf("Failed to open file %s\n", SceneFilePath);
-//        return 0;
-//    }
-//    int SceneSize = g_ShareMemory;
-//    fprintf(file, "%d\n", g_mapIndex);
-//    for (int i = 0; i < SceneSize; i++)
-//    {
-//        fprintf(file, "%d\n", g_scene[i]->index);
-//        for (int j = 0; j < g_scene[i]->index; j++)
-//        {
-//            //写入g_scene里base的x,y,type每写入一个换一次行
-//            fprintf(file, "%d %d %d\n", g_scene[i]->bases[j]->x, g_scene[i]->bases[j]->y, g_scene[i]->bases[j]->type);
-//        }
-//    }
-//    fclose(file);
-//    return 1;
-//}

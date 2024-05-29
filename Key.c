@@ -74,7 +74,7 @@ static int KeySave(PBase self, const char* buf, int size)
     return nret;
 }
 
-PBase CreateYellowKey(int x, int y, int type)
+PBase CreateYellowKey(int x, int y, int type, const char* buf)
 {
     PKey key = malloc(sizeof(TKey));
     key->base.x = x;
@@ -88,7 +88,7 @@ PBase CreateYellowKey(int x, int y, int type)
     return (PBase)key;
 }
 
-PBase CreateBlueKey(int x, int y, int type)
+PBase CreateBlueKey(int x, int y, int type, const char* buf)
 {
     PKey key = malloc(sizeof(TKey));
     key->base.x = x;
@@ -102,7 +102,7 @@ PBase CreateBlueKey(int x, int y, int type)
     return (PBase)key;
 }
 
-PBase CreateRedKey(int x, int y, int type)
+PBase CreateRedKey(int x, int y, int type, const char* buf)
 {
     PKey key = malloc(sizeof(TKey));
     key->base.x = x;

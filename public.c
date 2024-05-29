@@ -3,9 +3,6 @@
 // 定义一个静态数组s_creates，用于存储不同类型的游戏对象创建函数
 static FCreateMaster  s_creates[1024] = { 0 };
 
-//获取hero.h里的LoadHero函数
-int LoadHero(int type, int x, int y, char* HeroName, int level, int hp, int atk, int def, int gold, int exp, int yellow, int blue, int red);
-// 函数RegCreateMaster用于注册一个新的游戏对象创建函数到s_creates数组中
 void RegCreateMaster(int index, FCreateMaster cb)
 {
     s_creates[index] = cb;
@@ -40,9 +37,8 @@ void RegCreateMasterAll()
 }
 
 static int sg_Sceneindex = 0;
-// 函数CreateScene用于根据给定的地图数据创建一个场景
 
-//传一个creat index Scene
+
 PScene CreateScene(int* maps, int w, int h)
 {
     // 分配内存用于存储场景信息
@@ -63,7 +59,7 @@ PScene CreateScene(int* maps, int w, int h)
             if (f == NULL) continue; // 如果没有找到对应的创建函数，跳过此次循环
 
             // 调用创建函数创建游戏对象
-            PBase base = f(x, y, type);
+            PBase base = f(x, y, type,NULL);
             if (base == NULL) continue; // 如果创建失败，跳过此次循环
 
             // 将新创建的游戏对象添加到场景中
@@ -97,74 +93,29 @@ int LoadSceneFile()
 
         g_scene[i]->index = 0;
         int indexLast = 0;
-        int FileIndexScene = fscanf(file, "%d", &g_scene[i]->indexScene);
-        int FileIndex = fscanf(file, "%d", &indexLast);
-
-        if (FileIndexScene != 1 && FileIndex != 1)
+        do
         {
-            printf("Error reading IndexScene Index From File.\n");
-            fclose(file);
-            Sleep(1000);
-            return 0;
-        }
+            char buf[1024] = { 0 };
+            fgets(buf, 1024, file);
+            sscanf(buf, "%d %d", &g_scene[i]->indexScene, &indexLast);
+        } while (0);
         for (int j = 0; j < indexLast; j++)
         {
-            int FileT = fscanf(file, "%d", &sType);
-            int FileX = fscanf(file, "%d", &sX);
-            int FileY = fscanf(file, "%d", &sY);
-            if (FileT != 1 && FileX != 1 && FileY != 1)
-            {
-                printf("Error reading xyType from file.\n");
-                fclose(file);
-                Sleep(1000);
-                return 0; // Indicate failure
-            }
+            char buf[1024] = { 0 };
+            fgets(buf, 1024, file);
+            int sType, sX, sY;
+            sscanf(buf, "%d %d %d", &sType, &sX, &sY);
             if (sType == 2)
             {
-                PBase  base = s_creates[sType](sX, sY, sType);
-                base->scene = g_scene[i];
-                g_scene[i]->bases[g_scene[i]->index] = base;
-                g_scene[i]->index++;
                 g_mapIndex = g_scene[i]->indexScene;
-                //hero->name, hero->level, hero->hp, hero->atk, hero->def, hero->gold, hero->exp, hero->yellow, hero->blue, hero->red
-                char* HeroName = (char*)malloc(1024 * sizeof(char));
-                int level;
-                int hp;
-                int atk;
-                int def;
-                int gold;
-                int exp;
-                int yellow;
-                int blue;
-                int red;
-                fscanf(file, "%s", HeroName);
-                fscanf(file, "%d", &level);
-                fscanf(file, "%d", &hp);
-                fscanf(file, "%d", &atk);
-                fscanf(file, "%d", &def);
-                fscanf(file, "%d", &gold);
-                fscanf(file, "%d", &exp);
-                fscanf(file, "%d", &yellow);
-                fscanf(file, "%d", &blue);
-                fscanf(file, "%d", &red);
-                LoadHero(sType,sX,sY,HeroName, level, hp, atk, def, gold, exp, yellow, blue, red);
-                free(HeroName);
             }
-            else
-            {
-                // 根据类型从s_creates数组中获取相应的创建函数
-                FCreateMaster f = s_creates[sType];
-                if (f == NULL) continue; // 如果没有找到对应的创建函数，跳过此次循环
+            FCreateMaster f = s_creates[sType];
+            if (f == NULL)continue;
 
-                // 调用创建函数创建游戏对象
-                PBase base = f(sX, sY, sType);
-                if (base == NULL) continue; // 如果创建失败，跳过此次循环
-
-                // 将新创建的游戏对象添加到场景中
-                base->scene = g_scene[i];
-                g_scene[i]->bases[g_scene[i]->index] = base;
-                g_scene[i]->index++;
-            }
+            PBase base = f(sX, sY, sType, buf);
+            if (base == NULL)continue;
+            base->scene = g_scene[i];
+            g_scene[i]->bases[g_scene[i]->index++] = base;
         }
         fclose(file);
     }

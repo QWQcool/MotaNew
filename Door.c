@@ -88,7 +88,7 @@ static int DoorSave(PBase self, const char* buf, int size)
     return nret;
 }
 
-PBase CreateYellowDoor(int x, int y, int type)
+PBase CreateYellowDoor(int x, int y, int type, const char* buf)
 {
     PDoor door = malloc(sizeof(TDoor));
     door->base.x = x;
@@ -102,7 +102,7 @@ PBase CreateYellowDoor(int x, int y, int type)
     return (PBase)door;
 }
 
-PBase CreateBlueDoor(int x, int y, int type)
+PBase CreateBlueDoor(int x, int y, int type, const char* buf)
 {
     PDoor door = malloc(sizeof(TDoor));
     door->base.x = x;
@@ -116,7 +116,7 @@ PBase CreateBlueDoor(int x, int y, int type)
     return (PBase)door;
 }
 
-PBase CreateRedDoor(int x, int y, int type)
+PBase CreateRedDoor(int x, int y, int type, const char* buf)
 {
     PDoor door = malloc(sizeof(TDoor));
     door->base.x = x;

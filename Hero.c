@@ -120,11 +120,16 @@ static void (HeroFreeCB)(void* that)
     s_hero = NULL;
 }
 
-PBase CreateHero(int x, int y, int type)
+PBase CreateHero(int x, int y, int type, const char* buf)
 {
     if(s_hero!=NULL)
     {
-        //assert(s_hero!=NULL);
+        if (buf)
+        {
+            //hero->name, hero->level, hero->hp, hero->atk, hero->def, hero->gold, hero->exp, hero->yellow, hero->blue, hero->red
+            sscanf(buf, "%d %d %d %s %d %d %d %d %d %d %d %d %d", &s_hero->base.type, &s_hero->base.x, &s_hero->base.y,
+                s_hero->name, &s_hero->level, &s_hero->hp, &s_hero->atk, &s_hero->def, &s_hero->gold, &s_hero->exp, &s_hero->yellow, &s_hero->blue, &s_hero->red);
+        }
         return (PBase)s_hero;
         return NULL;
     }
@@ -138,21 +143,20 @@ PBase CreateHero(int x, int y, int type)
     hero->base.Print = Print;
     hero->base.Save = HeroSave;
     hero->base.release = HeroFreeCB;
-    //1lv 800hp 10atk 10def 0gold 0exp 1yellow 1blue 1red
-    //hero->level = 1;
-    //hero->hp = 800;
-    //hero->atk = 10;
-    //hero->def = 10;
-    //hero->gold = 20;
-    //hero->exp = 0;
-    //hero->yellow = 1;
-    //hero->blue = 1;
-    //hero->red = 1;
-     int isInit_Hero = Hero_Init(hero);
-     if (isInit_Hero == -1) {
+    if (buf)
+    {
+        //hero->name, hero->level, hero->hp, hero->atk, hero->def, hero->gold, hero->exp, hero->yellow, hero->blue, hero->red
+        sscanf(buf, "%d %d %d %s %d %d %d %d %d %d %d %d %d", &hero->base.type, &hero->base.x, &hero->base.y, 
+            hero->name,&hero->level,&hero->hp,&hero->atk,&hero->def,&hero->gold,&hero->exp,&hero->yellow,&hero->blue,&hero->red);
+    }
+    else
+    {
+        int isInit_Hero = Hero_Init(hero);
+        if (isInit_Hero == -1) {
             printf("Init Hero Error");
             exit(1);
-     }
+        }
+    }
     s_hero = hero;
     return (PBase)hero;
 }
@@ -189,7 +193,7 @@ int Save_Hero()
     FILE* file = fopen(HeroFileName, "w");// 使用"w"模式打开文件，这将清空文件内容
 
     if (file == NULL) {
-        //printf("Failed to open file %s\n", *HeroFileName);
+        printf("Failed to open file %s\n", *HeroFileName);
         return 0;
     }
 
@@ -207,23 +211,4 @@ int Save_Hero()
 
     fclose(file);
     return 1;
-}
-
-
-int LoadHero(int type,int x,int y,char* HeroName,int level,int hp,int atk,int def, int gold, int exp , int yellow , int blue,int red)
-{
-    //s_hero->name = HeroName;
-    s_hero->base.type = type;
-    s_hero->base.x = x;
-    s_hero->base.y = y;
-    strncpy(s_hero->name, HeroName, sizeof(s_hero->name));
-    s_hero->level = level;
-    s_hero->hp = hp;
-    s_hero->atk = atk;
-    s_hero->def = def;
-    s_hero->gold = gold;
-    s_hero->exp = exp;
-    s_hero->yellow = yellow;
-    s_hero->blue = blue;
-    s_hero->red = red;
 }

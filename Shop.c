@@ -187,7 +187,7 @@ static int ShopSave(PBase self, const char* buf, int size)
 }
 
 
-PBase CreateShop(int x, int y, int type)
+PBase CreateShop(int x, int y, int type, const char* buf)
 {
     PShop shop = malloc(sizeof(TShop));
     shop->base.x = x;

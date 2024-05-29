@@ -69,7 +69,7 @@ static void (FloorFreeCB)(void* that)
     free(that);
 }
 
-PBase CreateUpStairFloor(int x, int y, int type)
+PBase CreateUpStairFloor(int x, int y, int type, const char* buf)
 {
     PFloor floor = malloc(sizeof(TFloor));
     floor->base.x = x;
@@ -83,7 +83,7 @@ PBase CreateUpStairFloor(int x, int y, int type)
     return (PBase)floor;
 }
 
-PBase CreateDownStairFloor(int x, int y, int type)
+PBase CreateDownStairFloor(int x, int y, int type, const char* buf)
 {
     PFloor floor = malloc(sizeof(TFloor));
     floor->base.x = x;
