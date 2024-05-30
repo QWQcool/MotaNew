@@ -13,6 +13,7 @@ typedef struct sMonster
 }TMonster, * PMonster;
 
 int MonsterFright(PMonster monster, PHero hero);
+int MonsterFright_Show(PMonster monster, PHero hero);
 
 static void Print(PBase self)
 {

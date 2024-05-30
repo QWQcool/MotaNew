@@ -1,12 +1,8 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: 中间目录(x64\Debug\)包含从另一个项目(Mota24240513.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
-  Hero.c
+  Scene.c
 C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\public.h(29,2): warning C4091: “typedef ”: 没有声明变量时忽略“sBase”的左侧
 C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\hero.h(22,41): warning C4030: 第一个形参表比第二个长
-C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Hero.c(15,27): warning C4090: “函数”: 不同的“const”限定符
-C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Hero.c(124,1): warning C4029: 声明的形参表不同于定义
-C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Hero.c(145,22): warning C4133: “=”: 从“void (__cdecl *)(PBase)”到“FPrint”的类型不兼容
-C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Hero.c(195,13): warning C4047: “函数”:“char *const ”与“const char *[1024]”的间接级别不同
-C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Hero.c(195,13): warning C4024: “sprintf”: 形参和实参 1 的类型不同
-C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Hero.c(196,24): warning C4047: “函数”:“const char *”与“const char *[1024]”的间接级别不同
-C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Hero.c(196,24): warning C4024: “fopen”: 形参和实参 1 的类型不同
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Scene.c(46,17): warning C4133: “==”: 从“PHero”到“PBase”的类型不兼容
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Scene.c(269,26): warning C4047: “初始化”:“FGetModuleId”与“FCreateMaster”的间接级别不同
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Scene.c(147): warning C4716: “LoadGame”: 必须返回一个值
   MotaNew.vcxproj -> C:\Users\licuocuo\Desktop\Desktop\code\VSC++\cHomeWorkOne\x64\Debug\MotaNew.exe

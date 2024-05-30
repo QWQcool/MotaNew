@@ -76,6 +76,13 @@ void RemoveSceneItem(PBase base);
 //英雄在楼层移动
 void SetHeroMoveFloorXY(int x, int y);
 int HeroMoveFloor(int beforeIndex);
+//怪兽战斗相关
+
+
+//加载dll相关
+
+void LoadAllModule();
+
 
 // 声明一系列创建不同类型游戏对象的函数，它们都接受位置(x, y)和类型(type)作为参数，并返回一个指向sBase结构体的指针
 PBase CreateWall(int x, int y, int type,const char* buf);

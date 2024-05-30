@@ -2,6 +2,7 @@
 #include "public.h"
 #include "hero.h"
 #include <conio.h>
+#include <windows.h>
 
 //PScene s_scene[1024] = { 0 };
 static PBase s_removeBase = 0;
@@ -143,4 +144,160 @@ int LoadGame()
     }
     free(GetHero());
     LoadSceneFile(g_scene);
+}
+
+
+typedef void(*FAddHp)(PHero hero, int hp);
+
+typedef struct sFunc
+{
+    FAddHp AddHp;
+}TFunc, * PFunc;
+
+int GetDirectory(char* path, int len)
+{
+    unsigned long size = GetCurrentDirectoryA(0, NULL);
+    if (GetCurrentDirectoryA(len, path) == 0)
+        return -1;
+    return size;
+}
+
+
+//FindAllFiles("./","*.*")
+void FindAllFiles(const char* dir, const char* extend)
+{
+    HANDLE hFind;
+    WIN32_FIND_DATAA findData;
+    LARGE_INTEGER size;
+    char path[4096];
+    sprintf(path, "%s/%s", dir, extend);
+    hFind = FindFirstFileA(path, &findData);
+
+    if (hFind == INVALID_HANDLE_VALUE)
+    {
+        printf("Failed to find first file!\n");
+        return;
+    }
+
+    do
+    {
+        // 忽略"."和".."两个结果 
+        if (strcmp(findData.cFileName, ".") == 0 || strcmp(findData.cFileName, "..") == 0)
+            continue;
+
+        if (findData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)    // 是否是目录 
+        {
+            printf("%s %s", findData.cFileName, "\t<dir>\n");
+        }
+        else
+        {
+            size.LowPart = findData.nFileSizeLow;
+            size.HighPart = findData.nFileSizeHigh;
+            printf("%8lld bytes \t %s \n", size.QuadPart, findData.cFileName);
+        }
+
+    } while (FindNextFileA(hFind, &findData));
+    FindClose(hFind);
+}
+
+TFunc s_funcs;
+typedef int(*FGetModuleId)();
+typedef void(*FRegFuncs)(PFunc funcs);
+typedef struct sPluginNode_
+{
+    char path[1024];
+    char name[128];
+    HMODULE module;
+    FCreateMaster CreateMaster;
+    FGetModuleId GetModuleId;
+    FRegFuncs  funcs;
+
+}sPluginNode;
+
+typedef struct sPlugin_
+{
+    sPluginNode* nodes[1024];
+    int index;
+}sPlugin;
+
+
+sPlugin* GetAllPluginModule()
+{
+    char pathDir[1024] = "";
+    int len = GetDirectory(pathDir, 1024);
+
+    HANDLE hFind;
+    WIN32_FIND_DATAA findData;
+    LARGE_INTEGER size;
+    char path[4096];
+    sprintf(path, "%s\\plugins\\%s", pathDir, "*.dll");
+    hFind = FindFirstFileA(path, &findData);
+
+    if (hFind == INVALID_HANDLE_VALUE)
+    {
+        printf("Failed to find first file!\n");
+        return NULL;
+    }
+
+    sPlugin* plugin = malloc(sizeof(sPlugin));
+    memset(plugin, 0, sizeof(sPlugin));
+    plugin->index = 0;
+    do
+    {
+        // 忽略"."和".."两个结果 
+        if (strcmp(findData.cFileName, ".") == 0 || strcmp(findData.cFileName, "..") == 0)
+            continue;
+
+        if (findData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)    // 是否是目录 
+        {
+            //printf("%s %s", findData.cFileName, "\t<dir>\n");
+        }
+        else
+        {
+            sPluginNode* node = malloc(sizeof(sPluginNode));
+            plugin->nodes[plugin->index++] = node;
+
+            sprintf(node->path, "%s\\plugins\\%s", pathDir, findData.cFileName);
+            sprintf(node->name, "%s", findData.cFileName);
+            size.LowPart = findData.nFileSizeLow;
+            size.HighPart = findData.nFileSizeHigh;
+            //printf("%8ld bytes \t %s \n", size.QuadPart, findData.cFileName);
+            // 加载模块
+            HMODULE module = LoadLibraryA(node->path);
+            // 获取模块中的导出函数
+            FCreateMaster CreateMaster = (FCreateMaster)GetProcAddress(module, "CreateMaster");
+            FGetModuleId GetModuleId = (FCreateMaster)GetProcAddress(module, "GetModuleId");
+            FRegFuncs RegFuncs = (FRegFuncs)GetProcAddress(module, "RegFuncs");
+            node->module = module;
+            node->CreateMaster = CreateMaster;
+            node->GetModuleId = GetModuleId;
+            node->funcs = RegFuncs;
+        }
+
+    } while (FindNextFileA(hFind, &findData));
+    FindClose(hFind);
+    return plugin;
+}
+
+
+static void AddHp(PHero hero, int hp)
+{
+    hero->hp += hp;
+}
+
+void LoadAllModule()
+{
+    s_funcs.AddHp = AddHp;
+    sPlugin* plugin = GetAllPluginModule();
+
+    for (int i = 0; i < plugin->index; ++i)
+    {
+        sPluginNode* node = plugin->nodes[i];
+        //node->CreateMaster
+        RegCreateMaster(node->GetModuleId(), node->CreateMaster);
+
+        node->funcs(&s_funcs);
+    }
+
+
 }
