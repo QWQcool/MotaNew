@@ -13,7 +13,7 @@ typedef struct sBase(*PBase);
 typedef int (*FPrint)(PBase  self); 
 
 typedef int (*FCollion)(PBase  self, void* hero);
-typedef void (*FRelese)(void* that);
+typedef void (*FRelease)(void* that);
 typedef int (*FSave)(PBase  self, const char* buf, int size);
 
 typedef struct sBase
@@ -24,7 +24,7 @@ typedef struct sBase
     struct sScene* scene;
     FPrint Print;
     FCollion Collion;
-    FRelese release;
+    FRelease release;
     FSave  Save;
 };
 

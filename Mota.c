@@ -5,6 +5,7 @@ int Show_Widget();
 int main()
 {
     RegCreateMasterAll();
+    LoadAllModule();
     while (1)
     {
         if (Show_Widget())break;

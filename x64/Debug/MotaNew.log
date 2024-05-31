@@ -1,8 +1,23 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: 中间目录(x64\Debug\)包含从另一个项目(Mota24240513.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
-  Scene.c
+  Monster.c
 C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\public.h(29,2): warning C4091: “typedef ”: 没有声明变量时忽略“sBase”的左侧
 C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\hero.h(22,41): warning C4030: 第一个形参表比第二个长
-C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Scene.c(46,17): warning C4133: “==”: 从“PHero”到“PBase”的类型不兼容
-C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Scene.c(269,26): warning C4047: “初始化”:“FGetModuleId”与“FCreateMaster”的间接级别不同
-C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Scene.c(147): warning C4716: “LoadGame”: 必须返回一个值
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Monster.c(83,27): warning C4090: “函数”: 不同的“const”限定符
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Monster.c(96,1): warning C4029: 声明的形参表不同于定义
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Monster.c(102,25): warning C4133: “=”: 从“void (__cdecl *)(PBase)”到“FPrint”的类型不兼容
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Monster.c(116,1): warning C4029: 声明的形参表不同于定义
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Monster.c(122,25): warning C4133: “=”: 从“void (__cdecl *)(PBase)”到“FPrint”的类型不兼容
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Monster.c(136,1): warning C4029: 声明的形参表不同于定义
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Monster.c(142,25): warning C4133: “=”: 从“void (__cdecl *)(PBase)”到“FPrint”的类型不兼容
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Monster.c(156,1): warning C4029: 声明的形参表不同于定义
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Monster.c(162,25): warning C4133: “=”: 从“void (__cdecl *)(PBase)”到“FPrint”的类型不兼容
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Monster.c(176,1): warning C4029: 声明的形参表不同于定义
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Monster.c(182,25): warning C4133: “=”: 从“void (__cdecl *)(PBase)”到“FPrint”的类型不兼容
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Monster.c(196,1): warning C4029: 声明的形参表不同于定义
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Monster.c(202,25): warning C4133: “=”: 从“void (__cdecl *)(PBase)”到“FPrint”的类型不兼容
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Monster.c(216,1): warning C4029: 声明的形参表不同于定义
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Monster.c(222,25): warning C4133: “=”: 从“void (__cdecl *)(PBase)”到“FPrint”的类型不兼容
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Monster.c(273,9): warning C4013: “Sleep”未定义；假设外部返回 int
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Monster.c(297,17): warning C4013: “_getch”未定义；假设外部返回 int
+C:\Users\licuocuo\Desktop\Desktop\code\VSC++\MotaNew\Monster.c(286): warning C4715: “MonsterFright_Show”: 不是所有的控件路径都返回值
   MotaNew.vcxproj -> C:\Users\licuocuo\Desktop\Desktop\code\VSC++\cHomeWorkOne\x64\Debug\MotaNew.exe

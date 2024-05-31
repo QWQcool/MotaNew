@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "public.h"
 #include "hero.h"
+#include "Monster.h"
 #include <conio.h>
 #include <windows.h>
 
@@ -146,14 +147,6 @@ int LoadGame()
     LoadSceneFile(g_scene);
 }
 
-
-typedef void(*FAddHp)(PHero hero, int hp);
-
-typedef struct sFunc
-{
-    FAddHp AddHp;
-}TFunc, * PFunc;
-
 int GetDirectory(char* path, int len)
 {
     unsigned long size = GetCurrentDirectoryA(0, NULL);
@@ -161,7 +154,6 @@ int GetDirectory(char* path, int len)
         return -1;
     return size;
 }
-
 
 //FindAllFiles("./","*.*")
 void FindAllFiles(const char* dir, const char* extend)
@@ -199,6 +191,20 @@ void FindAllFiles(const char* dir, const char* extend)
     } while (FindNextFileA(hFind, &findData));
     FindClose(hFind);
 }
+
+
+typedef void(*FAddHp)(PHero hero, int hp);
+typedef int(*FMonsterFright)(PMonster monster, PHero hero);
+typedef int(*FMonsterFright_Show)(PMonster monster, PHero hero);
+typedef void(*FRemoveSceneItem)(PBase self);
+
+typedef struct sFunc
+{
+    FAddHp AddHp;
+    FMonsterFright MonsterFright;
+    FMonsterFright_Show MonsterFright_Show;
+    FRemoveSceneItem RemoveSceneItem;
+}TFunc, * PFunc;
 
 TFunc s_funcs;
 typedef int(*FGetModuleId)();
@@ -288,6 +294,9 @@ static void AddHp(PHero hero, int hp)
 void LoadAllModule()
 {
     s_funcs.AddHp = AddHp;
+    s_funcs.MonsterFright = MonsterFright;
+    s_funcs.MonsterFright_Show = MonsterFright_Show;
+    s_funcs.RemoveSceneItem = RemoveSceneItem;
     sPlugin* plugin = GetAllPluginModule();
 
     for (int i = 0; i < plugin->index; ++i)

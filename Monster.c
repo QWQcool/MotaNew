@@ -1,19 +1,19 @@
 #include "public.h"
 #include "hero.h"
-
-typedef struct sMonster
-{
-    TBase base;
-    int hp;
-    int atk;
-    int def;
-    int gold;
-    int exp;
-    char* name;
-}TMonster, * PMonster;
-
-int MonsterFright(PMonster monster, PHero hero);
-int MonsterFright_Show(PMonster monster, PHero hero);
+#include "Monster.h"
+//typedef struct sMonster
+//{
+//    TBase base;
+//    int hp;
+//    int atk;
+//    int def;
+//    int gold;
+//    int exp;
+//    char* name;
+//}TMonster, * PMonster;
+//
+//int MonsterFright(PMonster monster, PHero hero);
+//int MonsterFright_Show(PMonster monster, PHero hero);
 
 static void Print(PBase self)
 {
@@ -236,8 +236,8 @@ int MonsterFright_Show(PMonster monster, PHero hero)
 {
     int H_damage = hero->atk - monster->def;
     int M_damage = monster->atk - hero->def;
-    if (H_damage < 0)H_damage = 1;
-    if (M_damage < 0)M_damage = 1;
+    if (H_damage <= 0)H_damage = 1;
+    if (M_damage <= 0)M_damage = 1;
     while (monster->hp>0 && hero->hp>0)
     {
         printf("\033[1;65H                       ");
